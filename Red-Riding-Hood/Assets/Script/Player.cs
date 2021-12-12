@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
         if (jDown && !isJump)
         {
             anim.SetBool("isJumping", true);
+            anim.SetBool("isFalling", true);
             rigid.AddForce(Vector3.up * 20, ForceMode.Impulse);
             isJump = true;
         }
@@ -65,7 +66,8 @@ public class Player : MonoBehaviour
     {
         if(collision.gameObject.tag == "Floor")
         {
-             anim.SetBool("isJumping", false);
+            anim.SetBool("isJumping", false);
+            anim.SetBool("isFalling", false);
             isJump = false;
         }
     }
