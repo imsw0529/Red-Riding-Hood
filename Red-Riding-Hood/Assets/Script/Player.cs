@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         transform.position += moveVec * speed * Time.deltaTime;
-
+        transform.LookAt(transform.position + moveVec);
         anim.SetBool("isWalking", moveVec != Vector3.zero);
     }
 }
