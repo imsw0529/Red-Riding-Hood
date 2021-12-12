@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
     float hAxis;
     float vAxis;
     bool jDown;
+    bool isJump;
     
     Vector3 moveVec;
 
@@ -52,9 +53,20 @@ public class Player : MonoBehaviour
 
     void Jump()
     {
-        if (jDown)
+        if (jDown && !isJump)
         {
-            rigid.AddForce(Vector3.up * 7, ForceMode.Impulse);
+            anim.SetBool("isJumping", true);
+            rigid.AddForce(Vector3.up * 20, ForceMode.Impulse);
+            isJump = true;
+        }
+    }
+
+    void OnCollisionEnter(Collision collision) 
+    {
+        if(collision.gameObject.tag == "Floor")
+        {
+             anim.SetBool("isJumping", false);
+            isJump = false;
         }
     }
 }
