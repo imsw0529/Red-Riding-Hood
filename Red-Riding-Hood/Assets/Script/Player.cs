@@ -7,13 +7,17 @@ public class Player : MonoBehaviour
     public float speed;
     float hAxis;
     float vAxis;
-
+    bool jDown;
+    
     Vector3 moveVec;
 
     Animator anim;
 
+    Rigidbody rigid;
+
     void Awake()
     {
+        rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
     }
 
@@ -22,12 +26,14 @@ public class Player : MonoBehaviour
         GetInput();
         Move();
         Turn();
+        Jump();
     }
 
     void GetInput() 
     {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
+        jDown = Input.GetButtonDown("Jump");
     }
 
     void Move()
@@ -42,5 +48,13 @@ public class Player : MonoBehaviour
     void Turn()
     {
         transform.LookAt(transform.position + moveVec);
+    }
+
+    void Jump()
+    {
+        if (jDown)
+        {
+            rigid.AddForce(Vector3.up * 7, ForceMode.Impulse);
+        }
     }
 }
