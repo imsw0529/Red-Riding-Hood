@@ -19,13 +19,28 @@ public class Player : MonoBehaviour
 
     void Update()
     {
+        GetInput();
+        Move();
+        Turn();
+    }
+
+    void GetInput() 
+    {
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
+    }
 
+    void Move()
+    {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
         transform.position += moveVec * speed * Time.deltaTime;
-        transform.LookAt(transform.position + moveVec);
+       
         anim.SetBool("isWalking", moveVec != Vector3.zero);
+    }
+
+    void Turn()
+    {
+        transform.LookAt(transform.position + moveVec);
     }
 }
