@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     public int maxFlower;
 
     public GameObject[] flowers;
-    public int hasFlowers;
 
     void Awake()
     {
