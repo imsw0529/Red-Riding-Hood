@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class StageController : MonoBehaviour
@@ -21,6 +22,8 @@ public class StageController : MonoBehaviour
     private GameObject panelStageClear;
     private bool getAllFlowers = false;
 
+    [SerializeField]
+    private Timer timer;
 
     private void Awake()
     {
