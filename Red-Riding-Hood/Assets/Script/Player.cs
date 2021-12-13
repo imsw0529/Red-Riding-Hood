@@ -16,7 +16,11 @@ public class Player : MonoBehaviour
 
     Rigidbody rigid;
 
-    GameObject nearObject;
+    public int flower;
+    public int maxFlower;
+
+    public GameObject[] flowers;
+    public int hasFlowers;
 
     void Awake()
     {
@@ -74,15 +78,22 @@ public class Player : MonoBehaviour
         }
     }
 
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Flower")
-            nearObject = other.gameObject;
+        if(other.tag == "Item")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type) {
+                case Item.Type.Flower :
+                    flowers[flower].SetActive(true);
+                    flower += item.value;
+                    if(flower > maxFlower)
+                        flower = maxFlower;
+                    break;
+            }
+            Destroy(other.gameObject);
+        }      
     }
-
-    void OnTriggerExit(Collider other)
-    {
-        if(other.tag == "Flower")
-            nearObject = null;
-    }
+    
 }
+
