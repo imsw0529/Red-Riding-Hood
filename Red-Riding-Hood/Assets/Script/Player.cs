@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 
     Rigidbody rigid;
 
+    GameObject nearObject;
+
     void Awake()
     {
         rigid = GetComponent<Rigidbody>();
@@ -70,5 +72,17 @@ public class Player : MonoBehaviour
             anim.SetBool("isFalling", false);
             isJump = false;
         }
+    }
+
+    void OnTriggerStay(Collider other)
+    {
+        if(other.tag == "Flower")
+            nearObject = other.gameObject;
+    }
+
+    void OnTriggerExit(Collider other)
+    {
+        if(other.tag == "Flower")
+            nearObject = null;
     }
 }
