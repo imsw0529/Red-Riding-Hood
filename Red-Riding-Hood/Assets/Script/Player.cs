@@ -5,10 +5,8 @@ using UnityEngine;
 public class Player : MonoBehaviour
 {
     public float speed;
-    float runSpeed;
     float hAxis;
     float vAxis;
-    bool run;
     bool jDown;
     bool isJump;
     
@@ -42,21 +40,15 @@ public class Player : MonoBehaviour
         hAxis = Input.GetAxisRaw("Horizontal");
         vAxis = Input.GetAxisRaw("Vertical");
         jDown = Input.GetButtonDown("Jump");
-        run = Input.GetKey(KeyCode.LeftShift);
-        if (run)
-            runSpeed = 2f;
-        else
-            runSpeed = 1f;
     }
 
-        void Move()
+    void Move()
     {
         moveVec = new Vector3(hAxis, 0, vAxis).normalized;
 
-        transform.position += moveVec * runSpeed * speed * Time.deltaTime;
+        transform.position += moveVec * speed * Time.deltaTime;
        
         anim.SetBool("isWalking", moveVec != Vector3.zero);
-        anim.SetBool("isRunning", run);
     }
 
     void Turn()
