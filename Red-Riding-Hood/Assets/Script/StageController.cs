@@ -20,7 +20,10 @@ public class StageController : MonoBehaviour
 
     [SerializeField]
     private GameObject panelStageClear;
+    [SerializeField]
+    private GameObject panelGameOver;
     private bool getAllFlowers = false;
+
 
     [SerializeField]
     private Timer timer;
@@ -50,6 +53,11 @@ public class StageController : MonoBehaviour
 
             //클리어화면 활성화
             panelStageClear.SetActive(true);
+            
+        }
+        if(timer.getGameOver()){
+            Time.timeScale = 0.0f;
+            panelGameOver.SetActive(true);
         }
 
         if (getAllFlowers == true)

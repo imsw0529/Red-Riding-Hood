@@ -12,6 +12,9 @@ public class Timer : MonoBehaviour
 
     public float LimitTime;
 
+    private bool gameover = false;
+    private bool isStarted = false;
+
     [SerializeField]
     private Player player;
 
@@ -39,6 +42,19 @@ public class Timer : MonoBehaviour
             player.hunter = 0;
             currentHunterCount = 0;
         }
+
+        if(Mathf.Round(LimitTime)==0&&isStarted){
+            gameover=true;
+        }
+    }
+
+    public bool getGameOver(){
+        return gameover;
+    }
+
+    public void start(){
+        isStarted = true;
+        LimitTime = 300;
     }
 }
 
