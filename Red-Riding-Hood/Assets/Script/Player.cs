@@ -21,6 +21,9 @@ public class Player : MonoBehaviour
     public int flower;
     public int maxFlower;
 
+    public int hunter;
+    public int maxHunter;
+
     public GameObject[] flowers;
 
     void Awake()
@@ -96,6 +99,12 @@ public class Player : MonoBehaviour
                     flower += item.value;
                     if(flower > maxFlower)
                         flower = maxFlower;
+                    break;
+                
+                case Item.Type.Hunter :
+                    hunter += item.value;
+                    if(hunter > maxHunter)
+                        hunter = maxHunter;
                     break;
             }
             Destroy(other.gameObject);
