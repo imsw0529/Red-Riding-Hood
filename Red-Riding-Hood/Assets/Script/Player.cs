@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    public AudioClip audioJump;
+    public AudioClip audioItem;
+    public AudioClip audioRun;
+    AudioSource audioSource;
+
     public float speed;
     float runSpeed;
     float hAxis;
@@ -30,6 +35,7 @@ public class Player : MonoBehaviour
     {
         rigid = GetComponent<Rigidbody>();
         anim = GetComponentInChildren<Animator>();
+        this.audioSource = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -48,6 +54,7 @@ public class Player : MonoBehaviour
         run = Input.GetKey(KeyCode.LeftShift);
         if (run)
             runSpeed = 2f;
+    
         else
             runSpeed = 1f;
     }
@@ -75,6 +82,7 @@ public class Player : MonoBehaviour
             anim.SetBool("isFalling", true);
             rigid.AddForce(Vector3.up * 20, ForceMode.Impulse);
             isJump = true;
+            PlaySound(1);
         }
     }
 
@@ -107,8 +115,28 @@ public class Player : MonoBehaviour
                         hunter = maxHunter;
                     break;
             }
+
+            PlaySound(2);
+
             Destroy(other.gameObject);
         }      
+    }
+
+    void PlaySound(int action) {
+        switch (action) {
+            case 1:
+                audioSource.clip = audioJump;
+                break;
+
+            case 2:
+                audioSource.clip = audioItem;
+                break;
+
+            case 3:
+                audioSource.clip = audioRun;
+                break;
+        }
+        audioSource.Play();
     }
     
 }
